@@ -1,0 +1,2 @@
+minemeld-core>=0.9.37b1
+pymisp

@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h1 class="modal-title">MISP KEY</h1>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <form class="config-add-form form-horizontal m-t-xs">
+            <div class="form-group" id="fgPassword1">
+                <label class="col-xs-4 control-label">KEY</label>
+                <div class="col-xs-6">
+                    <input type="password" ng-model="vm.automation_key" class="form-control" placeholder="Key">
+                </div>
+            </div>
+            <div class="form-group" id="fgPassword12">
+                <label class="col-xs-4 control-label">REPEAT KEY</label>
+                <div class="col-xs-6">
+                    <input type="password" ng-model="vm.automation_key2" class="form-control" placeholder="Repeat Key">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button ng-disabled="!vm.valid()" class="btn btn-primary btn-sm" type="button" ng-click="vm.save()">OK</button>
+    <button class="btn btn-warning btn-sm" type="button" ng-click="vm.cancel()">CANCEL</button>
+</div>

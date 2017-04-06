@@ -1,0 +1,20 @@
+{
+    "version": "0.1",
+    "name": "minemeld-misp",
+    "author": "Palo Alto Networks",
+    "author_email": "techbizdev@paloaltonetworks.com",
+    "description": "MineMeld extension for MISP",
+    "entry_points": {
+        "minemeld_webui": {
+            "mmmispWebui": "mmmisp:webui_blueprint"
+        },
+        "minemeld_nodes": {
+            "mmmisp.Miner": "mmmisp.node:Miner"
+        },
+        "minemeld_prototypes": {
+            "mmmisp.prototypes": "mmmisp:prototypes"
+        }
+
+    },
+    "manifest_version": 0
+}

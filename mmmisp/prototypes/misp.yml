@@ -1,0 +1,44 @@
+url: https://www.misp-project.org/
+description: >
+  MineMeld nodes for MISP Threat Intelligence Platform.
+
+prototypes:
+  anyEvent:
+    author: Palo Alto Networks TBD
+    class: mmmisp.Miner
+    development_status: EXPERIMENTAL
+    node_type: miner
+    indicator_types:
+      - any
+    tags:
+      - extension
+      - misp
+    description: >
+      Miner for MISP
+    config:
+      # source name used in the indicators
+      source_name: misp.test
+      # filters for MISP query
+      # default: none
+      # this one check for published events with tag tlp:white
+      filters:
+        published: 1
+        tag: 'tlp:white'
+        datefrom: 180d
+        # datefrom: YYYY-MM-DD
+      # select specific inidicator types, default: null (any)
+      indicator_types: null
+      # verify remote certificate, default true
+      verify_cert: true
+      # age out of indicators
+      # disabled, removed when they disappear from the channel
+      age_out:
+        sudden_death: true
+        default: null
+      # flag indicators with share level green, if not specified
+      # by tag
+      attributes:
+        confidence: 70
+        # if not specified in the event, default is white for
+        # this prototype
+        share_leve: white
