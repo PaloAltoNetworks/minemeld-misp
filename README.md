@@ -30,7 +30,8 @@ url: https://misp.example.com
 # filters for MISP query
 # default: none
 # this one check for published events with tag tlp:white
-# you can specify a time window of the last N days using datefrom: <N>d 
+# you can specify a time window of the last N days using datefrom: <N>d
+# check the search_index API in PyMISP for available filter parameters
 filters:
   published: 1
   tag: 'tlp:white'
