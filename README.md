@@ -1,5 +1,5 @@
 # minemeld-misp
-MineMeld nodes for MISP
+MineMeld nodes for [MISP](http://www.misp-project.org/)
 
 ## Requirements
 
@@ -7,8 +7,8 @@ MineMeld >= 0.9.37b1
 
 ## Installation
 
-- in SYSTEM > EXTENSIONS install the extension using git https://github.com/PaloAltoNetworks/minemeld-misp.git
-- open a shell on MineMeld and restart the API daemon:
+- in SYSTEM > EXTENSIONS install the extension using *git* button (https://github.com/PaloAltoNetworks/minemeld-misp.git)
+- (temporary workaround for a bug in MineMeld) open a shell on MineMeld and restart the API daemon:
 
 ``$ sudo -u minemeld mm-supervisorctl restart minemeld-web``
 
