@@ -22,7 +22,7 @@ After COMMIT you will be able to specify the authentication key directly from th
 
 ### Prototype parameters
 
-````
+```yaml
 # source name, to identify the origin of the indicators inside MineMeld
 source_name: misp.test
 # URL of MISP
@@ -53,4 +53,4 @@ attributes:
   # if not specified in the event, default is white for
   # this prototype
   share_leve: white
-````
+```
