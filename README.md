@@ -39,6 +39,27 @@ filters:
 # select specific inidicator types, default: null (any)
 # indicator_types: ['URL', 'IPv4', 'IPv6']
 indicator_types: null
+# honour IDS flag, if true only events with IDS set will be exported
+honour_ids_flag: true
+# a dictionary of event attributes to be extracted, the value
+# of each in key in the dictionary is a JMESPATH expression
+# default:
+# event_attributes:
+#   info: info
+#   org: Org
+#   orgc: Orgc
+#   threat_level_id: threat_level_id
+#   uuid: uuid
+#   tags: Tag[*].name
+# a dictionary of attribute attributes to be extracted, the value
+# of each in key in the dictionary is a JMESPATH expression
+# default:
+# attribute_attributes:
+#   uuid: info
+#   category: Org
+#   comment: Orgc
+# prefix to be applied to indicator attributes, default: misp
+# prefix: misp
 # verify remote certificate, default true
 verify_cert: true
 # require a client certificate, default false
