@@ -33,7 +33,7 @@ class Miner(BasePollerFT):
         self.url = None
         self.verify_cert = True
 
-        self.datefrom_re = re.compile('^([0-9])+d$')
+        self.datefrom_re = re.compile('^([0-9]+)d$')
 
         super(Miner, self).__init__(name, chassis, config)
 
@@ -126,19 +126,23 @@ class Miner(BasePollerFT):
 
         misp = PyMISP(self.url, self.automation_key, **kwargs)
 
-        filters = self.filters.copy()
-        if 'datefrom' in filters:
-            df = filters.pop('datefrom')
+        filters = None
+        if self.filters is not None:
+            filters = self.filters.copy()
+            if 'datefrom' in filters:
+                df = filters.pop('datefrom')
 
-            mo = self.datefrom_re.match(df)
-            if mo is not None:
-                deltad = int(mo.group(1))
-                df = datetime.utcfromtimestamp(now/1000 - 86400 * deltad).strftime('%Y-%m-%d')
+                mo = self.datefrom_re.match(df)
+                if mo is not None:
+                    deltad = int(mo.group(1))
+                    df = datetime.utcfromtimestamp(now/1000 - 86400 * deltad).strftime('%Y-%m-%d')
 
-            filters['Datefrom'] = df
+                filters['Datefrom'] = df
 
-        du = filters.pop('dateuntil', None)
-        filters['Dateuntil'] = du
+            du = filters.pop('dateuntil', None)
+            if du is not None:
+                filters['Dateuntil'] = du
+        LOG.info('{} - query filters: {!r}'.format(self.name, filters))
 
         r = misp.get_index(filters)
 
