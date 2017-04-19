@@ -237,7 +237,7 @@ class Miner(BasePollerFT):
 
             for aname, aexpr in self.attribute_attributes.iteritems():
                 try:
-                    eresult = aexpr.search(event)
+                    eresult = aexpr.search(a)
                 except:
                     continue
 
