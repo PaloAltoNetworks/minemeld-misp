@@ -1,6 +1,7 @@
 import logging
 import os
 import re
+import copy
 from functools import partial
 from itertools import imap
 from datetime import datetime
@@ -23,7 +24,8 @@ _MISP_TO_MINEMELD = {
     'sha1': 'sha1',
     'sha512': 'sha512',
     'ssdeep': 'ssdeep',
-    'mutex': 'mutex'
+    'mutex': 'mutex',
+    'filename': 'file.name'
 }
 
 
@@ -33,7 +35,7 @@ class Miner(BasePollerFT):
         self.url = None
         self.verify_cert = True
 
-        self.datefrom_re = re.compile('^([0-9])+d$')
+        self.datefrom_re = re.compile('^([0-9]+)d$')
 
         super(Miner, self).__init__(name, chassis, config)
 
@@ -126,19 +128,23 @@ class Miner(BasePollerFT):
 
         misp = PyMISP(self.url, self.automation_key, **kwargs)
 
-        filters = self.filters.copy()
-        if 'datefrom' in filters:
-            df = filters.pop('datefrom')
+        filters = None
+        if self.filters is not None:
+            filters = self.filters.copy()
+            if 'datefrom' in filters:
+                df = filters.pop('datefrom')
 
-            mo = self.datefrom_re.match(df)
-            if mo is not None:
-                deltad = int(mo.group(1))
-                df = datetime.utcfromtimestamp(now/1000 - 86400 * deltad).strftime('%Y-%m-%d')
+                mo = self.datefrom_re.match(df)
+                if mo is not None:
+                    deltad = int(mo.group(1))
+                    df = datetime.utcfromtimestamp(now/1000 - 86400 * deltad).strftime('%Y-%m-%d')
 
-            filters['Datefrom'] = df
+                filters['Datefrom'] = df
 
-        du = filters.pop('dateuntil', None)
-        filters['Dateuntil'] = du
+            du = filters.pop('dateuntil', None)
+            if du is not None:
+                filters['Dateuntil'] = du
+        LOG.info('{} - query filters: {!r}'.format(self.name, filters))
 
         r = misp.get_index(filters)
 
@@ -206,6 +212,20 @@ class Miner(BasePollerFT):
 
             iv = {}
 
+            # Populate iv with the attributes from the event.
+            for aname, aexpr in self.attribute_attributes.iteritems():
+                try:
+                    eresult = aexpr.search(a)
+                except:
+                    continue
+
+                if eresult is None:
+                    continue
+
+                iv['{}_attribute_{}'.format(self.prefix, aname)] = eresult
+
+            iv.update(base_value)
+
             itype = a.get('type', None)
             if itype == 'ip-src':
                 iv['type'] = self._detect_ip_version(indicator)
@@ -221,6 +241,17 @@ class Miner(BasePollerFT):
                 indicator, _ = indicator.split('|', 1)
                 iv['type'] = self._detect_ip_version(indicator)
                 iv['direction'] = 'outbound'
+            elif itype[:9] == 'filename|':
+                indicator, indicator2 = indicator.split('|', 1)
+                iv['type'] = 'file.name'
+
+                # If we know the 2nd indicator type, clone the iv as it's the same event, and append it it to results
+                itype2 = _MISP_TO_MINEMELD.get(itype[9:], None)
+                if itype2 is not None:
+                    iv2 = copy.deepcopy(iv) # Copy IV since it's the same event, just different type
+                    iv2['type'] = 'sha256'
+                    result.append([indicator2, iv2]) # Append our second indicator
+
             else:
                 iv['type'] = _MISP_TO_MINEMELD.get(a.get('type', None), None)
 
@@ -230,19 +261,6 @@ class Miner(BasePollerFT):
 
             if self.indicator_types is not None and iv['type'] not in self.indicator_types:
                 continue
-
-            for aname, aexpr in self.attribute_attributes.iteritems():
-                try:
-                    eresult = aexpr.search(event)
-                except:
-                    continue
-
-                if eresult is None:
-                    continue
-
-                iv['{}_attribute_{}'.format(self.prefix, aname)] = eresult
-
-            iv.update(base_value)
 
             result.append([indicator, iv])
 
