@@ -249,7 +249,7 @@ class Miner(BasePollerFT):
                 itype2 = _MISP_TO_MINEMELD.get(itype[9:], None)
                 if itype2 is not None:
                     iv2 = copy.deepcopy(iv) # Copy IV since it's the same event, just different type
-                    iv2['type'] = 'sha256'
+                    iv2['type'] = itype2
                     result.append([indicator2, iv2]) # Append our second indicator
 
             else:
