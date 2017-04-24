@@ -124,7 +124,7 @@ class Miner(BasePollerFT):
 
         kwargs = {'ssl': self.verify_cert}
         if self.client_cert_required:
-            kwargs['cert'] = (self.cert_path, self.key_path)
+            kwargs['cert'] = (self.cert_file, self.key_file)
 
         misp = PyMISP(self.url, self.automation_key, **kwargs)
 
@@ -248,21 +248,21 @@ class Miner(BasePollerFT):
                 # If we know the 2nd indicator type, clone the iv as it's the same event, and append it it to results
                 itype2 = _MISP_TO_MINEMELD.get(itype[9:], None)
                 if itype2 is not None:
-                    iv2 = copy.deepcopy(iv) # Copy IV since it's the same event, just different type
+                    iv2 = copy.deepcopy(iv)  # Copy IV since it's the same event, just different type
                     iv2['type'] = itype2
-                    result.append([indicator2, iv2]) # Append our second indicator
+                    result.append([indicator2, iv2])  # Append our second indicator
 
             else:
-                iv['type'] = _MISP_TO_MINEMELD.get(a.get('type', None), None)
+                iv['type'] = _MISP_TO_MINEMELD.get(itype, None)
 
             if iv['type'] is None:
                 LOG.error('{} - Unhandled indicator type: {!r}'.format(self.name, a))
                 continue
 
-            if self.indicator_types is not None and iv['type'] not in self.indicator_types:
-                continue
-
             result.append([indicator, iv])
+
+            if self.indicator_types is not None:
+                result = [[ti, tiv] for ti, tiv in result if tiv['type'] in self.indicator_types]
 
         return result
 
