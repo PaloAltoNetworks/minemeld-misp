@@ -102,6 +102,13 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>URL</td>
+                    <td tooltip="set url" class="nodedetail-info-clickable" ng-click="sideConfig.setURL()">
+                        <span ng-if="!sideConfig.url"><em>Not set</em></span>
+                        <span ng-if="sideConfig.url">{{ sideConfig.url }}</span>
+                    </td>
+                </tr>
+                <tr>
                     <td>VERIFY CERT</td>
                     <td tooltip="toggle cert verification" class="nodedetail-info-clickable" ng-click="sideConfig.toggleCertificateVerification()">
                         <span ng-if="sideConfig.verify_cert === undefined"><em>Not set (default enabled)</em></span>

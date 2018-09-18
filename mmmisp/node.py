@@ -110,10 +110,15 @@ class Miner(BasePollerFT):
         self.automation_key = sconfig.get('automation_key', None)
         self.verify_cert = sconfig.get('verify_cert', True)
 
+        turl = sconfig.get('url', None)
+        if turl is not None:
+            self.url = turl
+            LOG.info('{} - url set'.format(self.name))
+
     def _load_event(self, misp, event):
         euuid = event.get('uuid', None)
         if euuid is None:
-            LOG.error('{} - event with no uuid: {!r}'.format(event))
+            LOG.error('{} - event with no uuid: {!r}'.format(self.name, event))
             return None
 
         return misp.get(event['uuid'])
@@ -121,6 +126,9 @@ class Miner(BasePollerFT):
     def _build_iterator(self, now):
         if self.automation_key is None:
             raise RuntimeError('{} - MISP Automation Key not set'.format(self.name))
+
+        if self.url is None:
+            raise RuntimeError('{} - MISP URL not set'.format(self.name))
 
         kwargs = {'ssl': self.verify_cert}
         if self.client_cert_required:

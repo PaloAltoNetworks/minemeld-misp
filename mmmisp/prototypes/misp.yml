@@ -3,7 +3,7 @@ description: >
   MineMeld nodes for MISP Threat Intelligence Platform.
 
 prototypes:
-  anyEvent:
+  tlpWhiteEvent:
     author: Palo Alto Networks TBD
     class: mmmisp.Miner
     development_status: EXPERIMENTAL
@@ -14,10 +14,10 @@ prototypes:
       - extension
       - misp
     description: >
-      Miner for MISP
+      Miner for MISP. This will extract all published events with tlp:white tag.
     config:
       # source name used in the indicators
-      source_name: misp.test
+      source_name: misp.tlpWhiteEvent
       # filters for MISP query
       # default: none
       # this one check for published events with tag tlp:white
@@ -35,10 +35,35 @@ prototypes:
       age_out:
         sudden_death: true
         default: null
-      # flag indicators with share level green, if not specified
+      # flag indicators with share level white, if not specified
       # by tag
       attributes:
         confidence: 70
         # if not specified in the event, default is white for
         # this prototype
         share_leve: white
+  anyEvent:
+    author: Palo Alto Networks TBD
+    class: mmmisp.Miner
+    development_status: EXPERIMENTAL
+    node_type: miner
+    indicator_types:
+      - any
+    tags:
+      - extension
+      - misp
+    description: >
+      Miner for MISP. This will extract any event and mark them
+      as share level red
+    config:
+      # source name used in the indicators
+      source_name: misp.anyEvent
+      filters: null
+      indicator_types: null
+      verify_cert: true
+      age_out:
+        sudden_death: true
+        default: null
+      attributes:
+        confidence: 70
+        share_leve: red

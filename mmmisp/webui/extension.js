@@ -9,6 +9,7 @@ function MISPSideConfigController($scope, MinemeldConfigService, MineMeldRunning
     // side config settings
     vm.verify_cert = undefined;
     vm.automation_key = undefined;
+    vm.url = undefined;
 
     vm.clientCertSet = undefined;
     vm.clientCertEnabled = undefined;
@@ -33,6 +34,12 @@ function MISPSideConfigController($scope, MinemeldConfigService, MineMeldRunning
             } else {
                 vm.verify_cert = undefined;
             }
+
+            if (result.url) {
+                vm.url = result.url;
+            } else {
+                vm.url = undefined;
+            }
         }, (error) => {
             toastr.error('ERROR RETRIEVING NODE SIDE CONFIG: ' + error.status);
             vm.automation_key = undefined;
@@ -48,6 +55,10 @@ function MISPSideConfigController($scope, MinemeldConfigService, MineMeldRunning
 
         if (vm.automation_key) {
             side_config.automation_key = vm.automation_key;
+        }
+
+        if (vm.url) {
+            side_config.url = vm.url;
         }
 
         if (typeof vm.verify_cert !== 'undefined') {
@@ -133,6 +144,32 @@ function MISPSideConfigController($scope, MinemeldConfigService, MineMeldRunning
         });
     };
 
+    vm.setURL = function() {
+        var mi = $modal.open({
+            templateUrl: '/extensions/webui/mmmispWebui/misp.miner.surl.modal.html',
+            controller: ['$modalInstance', 'url', MISPURLController],
+            controllerAs: 'vm',
+            bindToController: true,
+            backdrop: 'static',
+            animation: false,
+            resolve: {
+                url: vm.url
+            }
+        });
+
+        mi.result.then((result) => {
+            vm.url = result.url;
+
+            return vm.saveSideConfig();
+        })
+        .then(() => {
+            toastr.success('URL SET');
+            vm.loadSideConfig();
+        }, (error) => {
+            toastr.error('ERROR SETTING URL: ' + error.statusText);
+        });
+    };
+
     vm.toggleCertificateVerification = function() {
         var p, new_value;
 
@@ -212,6 +249,34 @@ function MISPAutomationKeyController($modalInstance) {
         var result = {};
 
         result.automation_key = vm.automation_key;
+
+        $modalInstance.close(result);
+    }
+
+    vm.cancel = function() {
+        $modalInstance.dismiss();
+    }
+}
+
+function MISPURLController($modalInstance, url) {
+    var vm = this;
+
+    vm.url = url;
+
+    vm.valid = function() {
+        angular.element('#url').removeClass('has-error');
+
+        if (!vm.url) {
+            return false;
+        }
+
+        return true;
+    };
+
+    vm.save = function() {
+        var result = {};
+
+        result.url = vm.url;
 
         $modalInstance.close(result);
     }
