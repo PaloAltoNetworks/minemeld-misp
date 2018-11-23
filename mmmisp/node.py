@@ -147,11 +147,11 @@ class Miner(BasePollerFT):
                     deltad = int(mo.group(1))
                     df = datetime.utcfromtimestamp(now/1000 - 86400 * deltad).strftime('%Y-%m-%d')
 
-                filters['Datefrom'] = df
+                filters['datefrom'] = df
 
             du = filters.pop('dateuntil', None)
             if du is not None:
-                filters['Dateuntil'] = du
+                filters['dateuntil'] = du
         LOG.info('{} - query filters: {!r}'.format(self.name, filters))
 
         r = misp.get_index(filters)

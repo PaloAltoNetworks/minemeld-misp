@@ -1,2 +1,2 @@
 minemeld-core>=0.9.37b1
-pymisp==2.4.89
+pymisp==2.4.96
