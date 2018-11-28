@@ -82,7 +82,8 @@ class Miner(BasePollerFT):
             dict(
                 uuid='uuid',
                 category='category',
-                comment='comment'
+                comment='comment',
+                tags='Tag[*].name'
             )
         )
         self.attribute_attributes = {}
@@ -179,8 +180,6 @@ class Miner(BasePollerFT):
         event = event.get('Event', None)
         if event is None:
             return []
-
-        LOG.debug(event)
 
         result = []
 
