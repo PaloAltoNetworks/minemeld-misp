@@ -147,14 +147,11 @@ function MISPSideConfigController($scope, MinemeldConfigService, MineMeldRunning
     vm.setURL = function() {
         var mi = $modal.open({
             templateUrl: '/extensions/webui/mmmispWebui/misp.miner.surl.modal.html',
-            controller: ['$modalInstance', 'url', MISPURLController],
+            controller: ['$modalInstance', MISPURLController],
             controllerAs: 'vm',
             bindToController: true,
             backdrop: 'static',
-            animation: false,
-            resolve: {
-                url: vm.url
-            }
+            animation: false
         });
 
         mi.result.then((result) => {
