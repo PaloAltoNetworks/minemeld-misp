@@ -132,6 +132,9 @@ class Miner(BasePollerFT):
             raise RuntimeError('{} - MISP URL not set'.format(self.name))
 
         kwargs = {'ssl': self.verify_cert}
+        if self.verify_cert and 'REQUESTS_CA_BUNDLE' in os.environ:
+            kwargs['ssl'] = os.environ['REQUESTS_CA_BUNDLE']
+
         if self.client_cert_required:
             kwargs['cert'] = (self.cert_file, self.key_file)
 
