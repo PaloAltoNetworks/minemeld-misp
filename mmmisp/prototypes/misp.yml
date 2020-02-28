@@ -41,7 +41,7 @@ prototypes:
         confidence: 70
         # if not specified in the event, default is white for
         # this prototype
-        share_leve: white
+        share_level: white
   anyEvent:
     author: Palo Alto Networks TBD
     class: mmmisp.Miner
@@ -66,4 +66,4 @@ prototypes:
         default: null
       attributes:
         confidence: 70
-        share_leve: red
+        share_level: red
