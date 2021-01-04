@@ -208,7 +208,10 @@ class Miner(BasePollerFT):
             if tname.startswith('tlp:'):
                 base_value['share_level'] = tname[4:]
 
-        attributes = event.get('Attribute', [])
+        attributes_object = map(lambda x: x['Attribute'], event.get('Object',[]))
+        attributes_standard = event.get('Attribute', [])
+        attributes = attributes_standard + attributes_object[0]
+        
         for a in attributes:
             if self.honour_ids_flag:
                 to_ids = a.get('to_ids', False)
