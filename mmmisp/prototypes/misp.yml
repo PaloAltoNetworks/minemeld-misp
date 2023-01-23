@@ -28,8 +28,8 @@ prototypes:
         # datefrom: YYYY-MM-DD
       # select specific inidicator types, default: null (any)
       indicator_types: null
-      # verify remote certificate, default true
-      verify_cert: true
+      # verify remote certificate, default false
+      verify_cert: false
       # age out of indicators
       # disabled, removed when they disappear from the channel
       age_out:
@@ -60,7 +60,7 @@ prototypes:
       source_name: misp.anyEvent
       filters: null
       indicator_types: null
-      verify_cert: true
+      verify_cert: false
       age_out:
         sudden_death: true
         default: null
