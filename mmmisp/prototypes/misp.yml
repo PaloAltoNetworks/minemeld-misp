@@ -67,3 +67,43 @@ prototypes:
       attributes:
         confidence: 70
         share_leve: red
+  tlpGreenEvent:
+    author: Palo Alto Networks TBD
+    class: mmmisp.Miner
+    development_status: EXPERIMENTAL
+    node_type: miner
+    indicator_types:
+      - any
+    tags:
+      - extension
+      - misp
+    description: >
+      Miner for MISP. This will extract all published events with tlp:green tag or lower.
+    config:
+      # source name used in the indicators
+      source_name: misp.tlpGreenEvent
+      # filters for MISP query
+      # default: none
+      # this one check for published events with tag tlp:white
+      filters:
+        published: 1
+        tag: 'tlp:white'
+        tag: 'tlp:green'
+        datefrom: 2020-01-01
+        # datefrom: YYYY-MM-DD
+      # select specific inidicator types, default: null (any)
+      indicator_types: null
+      # verify remote certificate, default false
+      verify_cert: false
+      # age out of indicators
+      # disabled, removed when they disappear from the channel
+      age_out:
+        sudden_death: true
+        default: null
+      # flag indicators with share level white, if not specified
+      # by tag
+      attributes:
+        confidence: 70
+        # if not specified in the event, default is white for
+        # this prototype
+        share_level: green
