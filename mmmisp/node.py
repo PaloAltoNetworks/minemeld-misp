@@ -149,7 +149,8 @@ class Miner(BasePollerFT):
                 mo = self.datefrom_re.match(df)
                 if mo is not None:
                     deltad = int(mo.group(1))
-                    df = datetime.utcfromtimestamp(now/1000 - 86400 * deltad).strftime('%Y-%m-%d')
+                    # df = datetime.utcfromtimestamp(now/1000 - 86400 * deltad).strftime('%Y-%m-%d')
+                    df = datetime.fromisoformat("2020-01-01Z00:00:00")
 
                 filters['datefrom'] = df
 
