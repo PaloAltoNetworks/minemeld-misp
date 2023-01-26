@@ -24,7 +24,7 @@ prototypes:
       filters:
         published: 1
         tag: 'tlp:white'
-        datefrom: 180d
+        datefrom: 2020-01-01
         # datefrom: YYYY-MM-DD
       # select specific inidicator types, default: null (any)
       indicator_types: null
