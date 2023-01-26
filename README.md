@@ -71,8 +71,8 @@ age_out:
 # flag indicators with share level white, if not specified
 # by tag
 attributes:
-  confidence: 70
+  confidence: 0
   # if not specified in the event, default is white for
   # this prototype
-  share_leve: white
+  share_level: white
 ```
