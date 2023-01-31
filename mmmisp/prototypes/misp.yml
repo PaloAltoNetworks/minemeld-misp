@@ -29,7 +29,7 @@ prototypes:
       attributes:
         confidence: 0
         share_leve: white
-    tlpWhiteEvent:
+  tlpGreenEvent:
     author: Palo Alto Networks TBD
     class: mmmisp.Miner
     development_status: PROTOTYPE
