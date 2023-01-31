@@ -28,7 +28,7 @@ prototypes:
         default: null
       attributes:
         confidence: 0
-        share_leve: white
+        share_level: white
   tlpGreenEvent:
     author: Palo Alto Networks TBD
     class: mmmisp.Miner
@@ -54,29 +54,4 @@ prototypes:
         default: null
       attributes:
         confidence: 0
-        share_leve: green
-  #anyEvent:
-    author: Palo Alto Networks TBD
-    class: mmmisp.Miner
-    development_status: EXPERIMENTAL
-    node_type: miner
-    indicator_types:
-      - any
-    tags:
-      - extension
-      - misp
-    description: >
-      Miner for MISP. This will extract any event and mark them
-      as share level red
-    config:
-      source_name: misp.anyEvent
-      filters: null
-      indicator_types: null
-      verify_cert: false
-      age_out:
-        sudden_death: true
-        default: null
-      attributes:
-        confidence: 70
-        share_leve: red
-  
+        share_level: green
