@@ -9,7 +9,12 @@ prototypes:
     development_status: PROTOTYPE
     node_type: miner
     indicator_types:
-      - any
+      - URL
+      - domain
+      - IPv4
+      - md5
+      - sha1
+      - sha256
     tags:
       - extension
       - misp
@@ -35,7 +40,12 @@ prototypes:
     development_status: PROTOTYPE
     node_type: miner
     indicator_types:
-      - any
+      - URL
+      - domain
+      - IPv4
+      - md5
+      - sha1
+      - sha256
     tags:
       - extension
       - misp
