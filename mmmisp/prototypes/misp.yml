@@ -1,12 +1,12 @@
 url: https://www.misp-project.org/
 description: >
-  MineMeld nodes for MISP Threat Intelligence Platform.
+  MineMeld nodes for MISP.
 
 prototypes:
   tlpGreenEvent:
-    author: Palo Alto Networks TBD
+    author: Palo Alto Feat. Martin Rojahn
     class: mmmisp.Miner
-    development_status: PROTOTYPE
+    development_status: PRODUCTION
     node_type: miner
     indicator_types:
       - IPv4
