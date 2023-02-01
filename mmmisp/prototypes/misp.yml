@@ -3,46 +3,15 @@ description: >
   MineMeld nodes for MISP Threat Intelligence Platform.
 
 prototypes:
-  tlpWhiteEvent:
-    author: Palo Alto Networks TBD
-    class: mmmisp.Miner
-    development_status: PROTOTYPE
-    node_type: miner
-    indicator_types:
-      - URL
-      - domain
-      - IPv4
-      - md5
-      - sha1
-      - sha256
-    tags:
-      - extension
-      - misp
-    description: >
-      Miner for MISP. This will extract all published events with tlp:white tag.
-    config:
-      source_name: misp.tlpWhiteEvent
-      filters:
-        published: 1
-        tag: 'tlp:white'
-        datefrom: 2020-01-01
-      indicator_types: null
-      verify_cert: false
-      age_out:
-        sudden_death: true
-        default: null
-      attributes:
-        confidence: 0
-        share_level: white
   tlpGreenEvent:
     author: Palo Alto Networks TBD
     class: mmmisp.Miner
     development_status: PROTOTYPE
     node_type: miner
     indicator_types:
+      - IPv4
       - URL
       - domain
-      - IPv4
       - md5
       - sha1
       - sha256
@@ -62,4 +31,3 @@ prototypes:
         default: null
       attributes:
         confidence: 0
-        share_level: green or lower
