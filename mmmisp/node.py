@@ -201,13 +201,16 @@ class Miner(BasePollerFT):
 
         # check tlp tag
         tags = event.get('Tag', [])
+        tags.append({'name': 'tlp:green'})
+        tags.append({'name': 'tlp:white'})
         for t in tags:
             tname = t.get('name', None)
             if tname is None:
                 continue
 
-            if tname.startswith('tlp:'):
-                base_value['share_level'] = tname[4:]
+    if tname.startswith('tlp:'):
+        base_value['share_level'] = tname[4:]
+
 
         attributes = event.get('Attribute', [])
         for a in attributes:
