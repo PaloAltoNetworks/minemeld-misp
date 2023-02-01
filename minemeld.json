@@ -2,6 +2,7 @@
     "version": "1.0",
     "name": "minemeld-misp",
     "author": "Palo Alto Feat. Martin Rojahn",
+    "author_email": "techbizdev@paloaltonetworks.com",
     "description": "MineMeld extension for MISP",
     "entry_points": {
         "minemeld_webui": {
