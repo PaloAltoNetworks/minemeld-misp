@@ -20,7 +20,6 @@ setup(
     name=_metadata['name'],
     version=_metadata['version'],
     author=_metadata['author'],
-    author_email=_metadata['author_email'],
     description=_metadata['description'],
     classifiers=[
         'Framework :: MineMeld',
