@@ -24,6 +24,7 @@ prototypes:
       filters:
         published: 1
         datefrom: 2020-01-01
+      indicator_types: null
       verify_cert: false
       age_out:
         sudden_death: true
