@@ -47,15 +47,13 @@ prototypes:
       - sha1
       - sha256
     tags:
-      - extension
       - misp
     description: >
-      Miner for MISP. This will extract all published events with tlp:green tag.
+      Miner for MISP. This will extract all published events with tlp:green tag or lower. 
     config:
       source_name: misp.tlpGreenEvent
       filters:
         published: 1
-        tag: 'tlp:green'
         datefrom: 2020-01-01
       indicator_types: null
       verify_cert: false
@@ -64,4 +62,4 @@ prototypes:
         default: null
       attributes:
         confidence: 0
-        share_level: green
+        share_level: green or lower
