@@ -208,8 +208,8 @@ class Miner(BasePollerFT):
             if tname is None:
                 continue
 
-    if tname.startswith('tlp:'):
-        base_value['share_level'] = tname[4:]
+            if tname.startswith('tlp:'):
+                base_value['share_level'] = tname[4:]
 
 
         attributes = event.get('Attribute', [])
