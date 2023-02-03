@@ -2,7 +2,7 @@ url: https://www.misp-project.org/
 description: >
   MineMeld nodes for Malware Information Sharing Platform. 
 prototypes:
-  tlpGreenEvent:
+  tlpGreen:
     author: Co-authored by Palo Alto & Martin Rojahn
     class: misp.Miner
     development_status: PRODUCTION
@@ -20,7 +20,7 @@ prototypes:
     description: >
       This will extract all published events with tlp:green tag or lower. 
     config:
-      source_name: misp.tlpGreenEvent
+      source_name: misp.tlpGreen
       filters:
         published: 1
         datefrom: 2020-01-01
