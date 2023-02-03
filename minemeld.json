@@ -1,7 +1,7 @@
 {
     "version": "1.0",
     "name": "misp-to-minemeld",
-    "author": "Co-authored by Palo Alto & Martin Rojahn",
+    "author": "Rewritten by Martin Rojahn",
     "author_email": "techbizdev@paloaltonetworks.com",
     "description": "MISP extension for MineMeld",
     "entry_points": {
