@@ -1,6 +1,6 @@
 url: https://www.misp-project.org/
 description: >
-  MineMeld nodes for Malware Information Sharing Platform. 
+  MISP nodes for MineMeld.
 prototypes:
   tlpGreen:
     author: Co-authored by Palo Alto & Martin Rojahn
