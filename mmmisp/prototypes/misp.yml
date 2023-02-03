@@ -3,7 +3,7 @@ description: >
   MineMeld nodes for Malware Information Sharing Platform. 
 prototypes:
   tlpGreenEvent:
-    author: Palo Alto Feat. Martin Rojahn
+    author: Co-authored by Palo Alto & Martin Rojahn
     class: mmmisp.Miner
     development_status: PRODUCTION
     node_type: miner
