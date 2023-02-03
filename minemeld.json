@@ -3,7 +3,7 @@
     "name": "Malware Information Sharing Platform",
     "author": "Rewritten by Martin Rojahn",
     "author_email": "techbizdev@paloaltonetworks.com",
-    "description": "Integration for ingesting indicators",
+    "description": "Extension for ingesting indicators",
     "entry_points": {
         "minemeld_webui": {
             "mmmispWebui": "mmmisp:webui_blueprint"
