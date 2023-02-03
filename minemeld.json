@@ -1,9 +1,9 @@
 {
     "version": "1.0",
-    "name": "misp-to-minemeld",
+    "name": "Malware Information Sharing Platform",
     "author": "Rewritten by Martin Rojahn",
     "author_email": "techbizdev@paloaltonetworks.com",
-    "description": "MISP extension for MineMeld",
+    "description": "Integration for ingesting indicators",
     "entry_points": {
         "minemeld_webui": {
             "mmmispWebui": "mmmisp:webui_blueprint"
