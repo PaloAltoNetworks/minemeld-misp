@@ -1,6 +1,6 @@
 url: https://www.misp-project.org/
 description: >
-  MISP nodes for MineMeld.
+  Prototype for creating nodes in MineMeld. 
 prototypes:
   tlpGreen:
     author: Co-authored by Palo Alto & Martin Rojahn
