@@ -3,7 +3,7 @@ description: >
   Prototype for creating nodes in MineMeld. 
 prototypes:
   tlpGreen:
-    author: Co-authored by Palo Alto & Martin Rojahn
+    author: Rewritten by Martin Rojahn
     class: misp.Miner
     development_status: PRODUCTION
     node_type: miner
