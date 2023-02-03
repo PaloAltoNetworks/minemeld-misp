@@ -4,7 +4,7 @@ description: >
 prototypes:
   tlpGreenEvent:
     author: Co-authored by Palo Alto & Martin Rojahn
-    class: mmmisp.Miner
+    class: misp.Miner
     development_status: PRODUCTION
     node_type: miner
     indicator_types:
@@ -16,6 +16,7 @@ prototypes:
       - sha256
     tags:
       - misp
+      - miner
     description: >
       Miner for MISP. This will extract all published events with tlp:green tag or lower. 
     config:
