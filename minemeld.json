@@ -2,6 +2,7 @@
     "version": "1.0",
     "name": "Malware Information Sharing Platform",
     "author": "Rewritten by Martin Rojahn",
+    "author_email": "techbizdev@paloaltonetworks.com",
     "description": "Extension for ingesting indicators",
     "entry_points": {
         "minemeld_webui": {
