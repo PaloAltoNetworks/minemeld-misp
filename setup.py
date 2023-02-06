@@ -34,7 +34,12 @@ setup(
     provides=find_packages(),
     install_requires=_requirements,
     package_data = {
-        '': ['prototypes/*.yml']
+        '': [
+                'prototypes/*.yml',
+                'webui/*.js',
+                'webui/*.html'
+            ]
     },
+
     entry_points=_entry_points
 )
