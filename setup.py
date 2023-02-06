@@ -13,8 +13,8 @@ with open('minemeld.json') as f:
 
 _entry_points={}
 if 'entry_points' in _metadata:
-    for epgroup, epoints in _metadata['entry_points'].iteritems():
-        _entry_points[epgroup] = ['{} = {}'.format(k, v) for k, v in epoints.iteritems()]
+    for epgroup, epoints in _metadata['entry_points'].items():
+        _entry_points[epgroup] = ['{} = {}'.format(k, v) for k, v in epoints.items()]
 
 setup(
     name=_metadata['name'],
