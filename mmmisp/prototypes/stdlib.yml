@@ -1,0 +1,1145 @@
+description: Library of prototypes for commonly used nodes
+url: https://go.paloaltonetworks.com/minemeld
+
+prototypes:
+    aggregatorURL:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - URL
+        tags: []
+        description: >
+            Aggregator for URL indicators.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.op.AggregateFT
+        config:
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept URL
+                  conditions:
+                    - type == 'URL'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    aggregatorEmailAddress:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - email-addr
+        tags: []
+        description: >
+            Aggregator for Email Address indicators.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.op.AggregateFT
+        config:
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept email addresses
+                  conditions:
+                    - type == 'email-addr'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    aggregatorIPv6Simple:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - IPv6
+        tags: []
+        description: >
+            Simple aggregator for IPv6 indicators.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.op.AggregateFT
+        config:
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept IPv6
+                  conditions:
+                    - type == 'IPv6'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    aggregatorDomain:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - domain
+        tags: []
+        description: >
+            Aggregator for domain indicators.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.op.AggregateFT
+        config:
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept domain
+                  conditions:
+                    - type == 'domain'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    aggregatorIPv4Generic:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - IPv4
+        tags: []
+        description: >
+            Generic Aggregator for IPv4 indicators.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.ipop.AggregateIPv4FT
+        config:
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept IPv4
+                  conditions:
+                    - type == 'IPv4'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    aggregatorIPv4GenericWithList:
+        author: MineMeld Core Team
+        development_status: EXPERIMENTAL
+        node_type: processor
+        indicator_types:
+          - IPv4
+        tags: []
+        description: >
+            Generic Aggregator for IPv4 indicators with list merge enabled.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.ipop.AggregateIPv4FT
+        config:
+            enable_list_merge: true
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept IPv4
+                  conditions:
+                    - type == 'IPv4'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    aggregatorIPv4Inbound:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - IPv4
+        tags: []
+        description: >
+            Aggregator for inbound IPv4 indicators.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.ipop.AggregateIPv4FT
+        config:
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept inbound IPv4
+                  conditions:
+                    - type == 'IPv4'
+                    - direction == 'inbound'
+                  actions:
+                    - accept
+                - name: accept generic IPv4
+                  conditions:
+                    - type == 'IPv4'
+                    - direction == null
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    aggregatorIPv4Outbound:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - IPv4
+        tags: []
+        description: >
+            Aggregator for outbound IPv4 indicators.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.ipop.AggregateIPv4FT
+        config:
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept inbound IPv4
+                  conditions:
+                    - type == 'IPv4'
+                    - direction == 'outbound'
+                  actions:
+                    - accept
+                - name: accept generic IPv4
+                  conditions:
+                    - type == 'IPv4'
+                    - direction == null
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    aggregatorMD5:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - md5
+        tags: []
+        description: >
+            Aggregator for MD5 indicators.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.op.AggregateFT
+        config:
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept MD5
+                  conditions:
+                    - type == 'md5'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    aggregatorSHA1:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - sha1
+        tags: []
+        description: >
+            Aggregator for SHA1 indicators.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.op.AggregateFT
+        config:
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept SHA1
+                  conditions:
+                    - type == 'sha1'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    aggregatorSHA256:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - sha256
+        tags: []
+        description: >
+            Aggregator for SHA256 indicators.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.op.AggregateFT
+        config:
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept SHA256
+                  conditions:
+                    - type == 'sha256'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    aggregatorSSDEEP:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - ssdeep
+        tags: []
+        description: >
+            Aggregator for ssdeep indicators.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.op.AggregateFT
+        config:
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept ssdeep
+                  conditions:
+                    - type == 'ssdeep'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    aggregatorMutex:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - mutex
+        tags: []
+        description: >
+            Aggregator for mutex indicators.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.op.AggregateFT
+        config:
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept mutex
+                  conditions:
+                    - type == 'mutex'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    aggregatorWindowsRegistryValue:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - windows-registry-value
+        tags: []
+        description: >
+            Aggregator for windows-registry-value indicators.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.op.AggregateFT
+        config:
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept windows-registry-value
+                  conditions:
+                    - type == 'windows-registry-value'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    aggregatorUserAgentFragment:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - user-agent.fragment
+        tags: []
+        description: >
+            Aggregator for user-agent.fragment indicators.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.op.AggregateFT
+        config:
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept user-agent.fragment
+                  conditions:
+                    - type == 'user-agent.fragment'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    aggregatorFileName:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - file.name
+        tags: []
+        description: >
+            Aggregator for file.name indicators.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.op.AggregateFT
+        config:
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept file.name
+                  conditions:
+                    - type == 'file.name'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    aggregatorProcessCommandLine:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - process.command_line
+        tags: []
+        description: >
+            Aggregator for process.command_line indicators.
+            Inputs with names starting with "wl" will be interpreted as
+            whitelists.
+        class: minemeld.ft.op.AggregateFT
+        config:
+            whitelist_prefixes:
+                - wl
+            infilters:
+                - name: accept process.command_line
+                  conditions:
+                    - type == 'process.command_line'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    feedLCGreen:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types: [ any ]
+        tags:
+          - ShareLevelGreen
+          - ConfidenceLow
+        description: >
+            EDL for low confidence indicators (<50) and share level green
+        class: minemeld.ft.redis.RedisSet
+        config:
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept confidence < 50 and share level green
+                  conditions:
+                    - confidence < 50
+                    - share_level == 'green'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    feedMCGreen:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types: [ any ]
+        tags:
+          - ConfidenceMedium
+          - ShareLevelGreen
+        description: >
+            EDL for medium confidence indicators (>=50,<75) and share level green
+        class: minemeld.ft.redis.RedisSet
+        config:
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept confidence 50-75 and share level green
+                  conditions:
+                    - confidence >= 50
+                    - confidence < 75
+                    - share_level == 'green'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    feedHCGreen:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types: [ any ]
+        tags:
+          - ConfidenceHigh
+          - ShareLevelGreen
+        description: >
+            EDL for high confidence indicators (>75) and share level green
+        class: minemeld.ft.redis.RedisSet
+        config:
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept confidence > 75 and share level green
+                  conditions:
+                    - confidence > 75
+                    - share_level == 'green'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    feedLCGreenWithValue:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types: [ any ]
+        tags:
+          - ConfidenceLow
+          - ShareLevelGreen
+        description: >
+            EDL for low confidence indicators (<50) and share level green, with value
+        class: minemeld.ft.redis.RedisSet
+        config:
+            store_value: true
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept confidence < 50 and share level green
+                  conditions:
+                    - confidence < 50
+                    - share_level == 'green'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    feedMCGreenWithValue:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types: [ any ]
+        tags:
+          - ConfidenceMedium
+          - ShareLevelGreen
+        description: >
+            EDL for medium confidence indicators (>=50,<75) and share level green, with value
+        class: minemeld.ft.redis.RedisSet
+        config:
+            store_value: true
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept confidence 50-75 and share level green
+                  conditions:
+                    - confidence >= 50
+                    - confidence < 75
+                    - share_level == 'green'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    feedHCGreenWithValue:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types: [ any ]
+        tags:
+          - ConfidenceHigh
+          - ShareLevelGreen
+        description: >
+            EDL for high confidence indicators (>75) and share level green, with value
+        class: minemeld.ft.redis.RedisSet
+        config:
+            store_value: true
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept confidence > 75 and share level green
+                  conditions:
+                    - confidence > 75
+                    - share_level == 'green'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    feedGreenWithValue:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types: [ any ]
+        tags:
+          - ShareLevelGreen
+        description: >
+            EDL for indicators with share level green, with value
+        class: minemeld.ft.redis.RedisSet
+        config:
+            store_value: true
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept share level green
+                  conditions:
+                    - share_level == 'green'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    feedRedWithValue:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types: [ any ]
+        tags:
+          - ShareLevelRed
+        description: >
+            EDL for indicators with share level red, with value
+        class: minemeld.ft.redis.RedisSet
+        config:
+            store_value: true
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept share level red
+                  conditions:
+                    - share_level == 'red'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    feedLCWithValue:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types: [ any ]
+        tags:
+          - ConfidenceLow
+        description: >
+            EDL for low confidence indicators (<50), with value
+        class: minemeld.ft.redis.RedisSet
+        config:
+            store_value: true
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept confidence < 50
+                  conditions:
+                    - confidence < 50
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    feedMCWithValue:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types: [ any ]
+        tags:
+          - ConfidenceMedium
+        description: >
+            EDL for medium confidence indicators (>=50,<75), with value
+        class: minemeld.ft.redis.RedisSet
+        config:
+            store_value: true
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept confidence 50-75
+                  conditions:
+                    - confidence >= 50
+                    - confidence < 75
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    feedHCWithValue:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types: [ any ]
+        tags:
+          - ConfidenceHigh
+        description: >
+            EDL for high confidence indicators (>75), with value
+        class: minemeld.ft.redis.RedisSet
+        config:
+            store_value: true
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept confidence > 75
+                  conditions:
+                    - confidence > 75
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    syslogMiner:
+        author: MineMeld Core Team
+        development_status: EXPERIMENTAL
+        node_type: miner
+        indicator_types:
+          - URL
+          - IPv4
+          - IPv6
+        tags:
+          - ConfidenceMedium
+        description: >
+            Miner for PAN-OS syslog messages
+        class: minemeld.ft.syslog.SyslogMiner
+        config:
+            source_name: panos.syslog
+            attributes:
+                confidence: 50
+
+    localSyslog:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: processor
+        indicator_types:
+          - domain
+          - IPv4
+          - IPv6
+        tags: []
+        description: >
+            Syslog node connection to the local syslog server to receive PAN-OS logs
+        class: minemeld.ft.syslog.SyslogMatcher
+        config: {}
+
+    localSyslogToLogStash:
+        author: MineMeld Core Team
+        development_status: EXPERIMENTAL
+        node_type: processor
+        indicator_types:
+          - IPv4
+          - IPv6
+          - domain
+        tags: []
+        description: >
+            Syslog node connection to the local syslog server to receive PAN-OS logs.
+            This prototype also logs matching sessions/indicators pairs to a Logstash
+            instance on localhost:5514
+        class: minemeld.ft.syslog.SyslogMatcher
+        config:
+            logstash_host: 127.0.0.1
+            logstash_port: 5514
+
+    localLogStash:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types: [ any ]
+        tags: []
+        description: >
+            Logstash node to send indicators message to a local logstash instance on
+            port 5514
+        class: minemeld.ft.logstash.LogstashOutput
+        config:
+            logstash_host: 127.0.0.1
+            logstash_port: 5514
+
+    dagPusher:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types:
+          - IPv4
+          - IPv6
+        tags: []
+        description: >
+            Push IP unicast indicators to PAN-OS devices via DAG.
+        class: minemeld.ft.dag.DagPusher
+        config: {}
+
+    nonpersistentDagPusher:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types:
+          - IPv4
+          - IPv6
+        tags: []
+        description: >
+            Push IP unicast indicators to PAN-OS devices via DAG. Generates
+            non persistent registered IPs.
+        class: minemeld.ft.dag.DagPusher
+        config:
+          persistent_registered_ips: false
+
+    dagPusherNg:
+        author: MineMeld Core Team
+        development_status: EXPERIMENTAL
+        node_type: output
+        indicator_types:
+          - IPv4
+          - IPv6
+        tags: []
+        description: >
+            Push IP unicast indicators to PAN-OS 8.0 and greater devices
+            via DAG.
+        class: minemeld.ft.dag_ng.DagPusher
+        config: {}
+
+    nonpersistentDagPusherNg:
+        author: MineMeld Core Team
+        development_status: EXPERIMENTAL
+        node_type: output
+        indicator_types:
+          - IPv4
+          - IPv6
+        tags: []
+        description: >
+            Push IP unicast indicators to PAN-OS 8.0 and greater devices
+            via DAG. Generates non persistent registered IPs.
+        class: minemeld.ft.dag_ng.DagPusher
+        config:
+          persistent_registered_ips: false
+
+    feedLCRedWithValue:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types: [ any ]
+        tags:
+          - ConfidenceLow
+          - ShareLevelRed
+        description: >
+            EDL for low confidence indicators (<50) and share level red, with value
+        class: minemeld.ft.redis.RedisSet
+        config:
+            store_value: true
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept confidence < 50 and share level red
+                  conditions:
+                    - confidence < 50
+                    - share_level == 'red'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    feedMCRedWithValue:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types: [ any ]
+        tags:
+          - ConfidenceMedium
+          - ShareLevelRed
+        description: >
+            EDL for medium confidence indicators (>=50,<75) and share level red, with value
+        class: minemeld.ft.redis.RedisSet
+        config:
+            store_value: true
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept confidence < 50 and share level red
+                  conditions:
+                    - confidence >= 50
+                    - confidence < 75
+                    - share_level == 'red'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    feedHCRedWithValue:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types: [ any ]
+        tags:
+          - ConfidenceHigh
+          - ShareLevelRed
+        description: >
+            EDL for high confidence indicators (>75) and share level red, with value
+        class: minemeld.ft.redis.RedisSet
+        config:
+            store_value: true
+            infilters:
+                - name: accept withdraws
+                  conditions:
+                    - __method == 'withdraw'
+                  actions:
+                    - accept
+                - name: accept confidence > 75 and share level red
+                  conditions:
+                    - confidence > 75
+                    - share_level == 'red'
+                  actions:
+                    - accept
+                - name: drop all
+                  actions:
+                    - drop
+
+    listIPv4Generic:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: miner
+        indicator_types:
+          - IPv4
+        tags:
+          - ConfidenceHigh
+        description: >
+            list of IPv4 addresses. Use a name starting with "wl" to create a whitelist for
+            an aggregator
+        class: minemeld.ft.local.YamlIPv4FT
+        config:
+            interval: 3600
+            age_out:
+                default: null
+                sudden_death: true
+                interval: 67
+            attributes:
+                confidence: 100
+                share_level: red
+
+    listIPv6Generic:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: miner
+        indicator_types:
+          - IPv6
+        tags:
+          - ConfidenceHigh
+        description: >
+            list of IPv6 addresses. Use a name starting with "wl" to create a whitelist for
+            an aggregator
+        class: minemeld.ft.local.YamlIPv6FT
+        config:
+            interval: 3600
+            age_out:
+                default: null
+                sudden_death: true
+                interval: 67
+            attributes:
+                confidence: 100
+                share_level: red
+
+    listURLGeneric:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: miner
+        indicator_types:
+          - URL
+        tags:
+          - ConfidenceHigh
+        description: >
+            list of URLs. Use a name starting with "wl" to create a whitelist for
+            an aggregator
+        class: minemeld.ft.local.YamlURLFT
+        config:
+            interval: 3600
+            age_out:
+                default: null
+                sudden_death: true
+                interval: 67
+            attributes:
+                confidence: 100
+                share_level: red
+
+    listDomainGeneric:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: miner
+        indicator_types:
+          - domain
+        tags:
+          - ConfidenceHigh
+        description: >
+            list of domain. Use a name starting with "wl" to create a whitelist for
+            an aggregator
+        class: minemeld.ft.local.YamlDomainFT
+        config:
+            interval: 3600
+            age_out:
+                default: null
+                sudden_death: true
+                interval: 67
+            attributes:
+                confidence: 100
+                share_level: red
+
+    taxiiDataFeed:
+        author: MineMeld Core Team
+        development_status: STABLE
+        node_type: output
+        indicator_types:
+          - IPv4
+          - IPv6
+          - domain
+          - URL
+          - md5
+          - sha256
+          - sha1
+        tags: []
+        description: TAXII DataFeed
+        class: minemeld.ft.taxii.DataFeed
+        config: {}
+
+    localDB:
+        author: MineMeld Core Team
+        development_status: EXPERIMENTAL
+        node_type: miner
+        indicator_types:
+          - any
+        tags:
+          - ConfidenceAny
+          - ShareLevelAny
+        description: >
+            list of indicators. Use a name starting with "wl" to create a whitelist for
+            an aggregator
+        class: minemeld.ft.localdb.Miner
+        config:
+            interval: 3600
+            attributes:
+                confidence: 100
+                share_level: red
